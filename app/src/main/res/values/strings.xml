@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="menu_announcement">Please select a menu item</string>
+    <string-array name="menu_items">
+        <item>Item 1</item>
+        <item>Item 2</item>
+    </string-array>
 </resources>
