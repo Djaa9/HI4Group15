@@ -1,17 +1,23 @@
 package djaa9.dk.thepage.hi4group15;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
 
-public class MainActivity extends ActionBarActivity {
+import roboguice.activity.RoboActivity;
+
+
+public class MainActivity extends RoboActivity {
+    @Inject Foo foo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        int test = foo.addIntegers(2,2);
     }
 
     @Override
