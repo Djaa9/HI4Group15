@@ -10,7 +10,7 @@ import roboguice.activity.RoboActivity;
 
 
 public class MainActivity extends RoboActivity {
-    @Inject Foo foo;
+    @Inject IFoo foo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
