@@ -1,23 +1,30 @@
 package djaa9.dk.thepage.hi4group15;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v4.app.FragmentActivity;
 
-
-public class ContentActivity extends Activity {
-    private TextView textView;
-    private Intent intent;
+public class ContentActivity extends FragmentActivity implements ContentFragment.OnFragmentInteractionListener {
+    private Intent _intent;
+    private String _selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
 
-        textView = (TextView) findViewById(R.id.content_txt);
+        _intent = getIntent();
+        _selectedItem = _intent.getStringExtra("KEY");
 
-        intent = getIntent();
-        textView.setText(intent.getStringExtra("KEY"));
+        ContentFragment fragment = (ContentFragment) getSupportFragmentManager().findFragmentById(R.id.frg_content);
+
+        fragment.setSelectedItemText(_selectedItem);
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
