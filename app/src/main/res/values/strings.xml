@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HI4Group15</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="content_activity2">ContentActivity 2</string>
     <string name="action_settings">Settings</string>
 
 <!-- TODO: Remove or change this placeholder text -->
@@ -10,4 +10,5 @@
         <item>Item 1</item>
         <item>Item 2</item>
     </string-array>
+    <string name="title_activity_content">ContentActivity</string>
 </resources>

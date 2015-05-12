@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 /**
@@ -33,6 +36,7 @@ public class MenuFragment extends Fragment {
 
     private ListView menuItems;
     private ArrayAdapter<String> adapter;
+    private String selectedMenuItem;
 
     /**
      * Use this factory method to create a new instance of
@@ -80,6 +84,14 @@ public class MenuFragment extends Fragment {
 
         menuItems.setAdapter(adapter);
 
+        menuItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedMenuItem = ((TextView)view).getText().toString();
+                mListener.onNewMenuItemSelected(selectedMenuItem);
+            }
+        });
+
         return v;
     }
 
@@ -107,7 +119,7 @@ public class MenuFragment extends Fragment {
         mListener = null;
     }
 
-    /**
+      /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
@@ -119,7 +131,8 @@ public class MenuFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
+        void onFragmentInteraction(Uri uri);
+        void onNewMenuItemSelected(String selectedMenuItem);
+      }
 
 }
