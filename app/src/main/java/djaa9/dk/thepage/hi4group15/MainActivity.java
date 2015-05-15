@@ -1,5 +1,6 @@
 package djaa9.dk.thepage.hi4group15;
 
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,7 +9,9 @@ import android.support.v4.app.FragmentManager;
 
 public class MainActivity extends FragmentActivity implements MenuFragment.OnFragmentInteractionListener {
     private FragmentManager _fragmentManager;
+    private FragmentTransaction _fragmentTransaction;
     private MenuFragment _menuFragment;
+    private ContentFragment _contentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class MainActivity extends FragmentActivity implements MenuFragment.OnFra
 
             _menuFragment = new MenuFragment();
             _fragmentManager = getSupportFragmentManager();
+
             _fragmentManager.beginTransaction().add(R.id.fragment_container, _menuFragment).commit();
         }
 
@@ -30,9 +34,17 @@ public class MainActivity extends FragmentActivity implements MenuFragment.OnFra
 
     @Override
     public void onNewMenuItemSelected(String selectedMenuItem) {
-//        Intent intent = new Intent(this, ContentActivity.class);
-//        intent.putExtra("KEY", selectedMenuItem);
-//        startActivity(intent);
+
+        _contentFragment = new ContentFragment();
+        Bundle args = new Bundle();
+        args.putString(ContentFragment.ARG_SELECTED_ITEM, selectedMenuItem);
+        _contentFragment.setArguments(args);
+
+        _fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        _fragmentTransaction.replace(R.id.fragment_container, _contentFragment);
+        _fragmentTransaction.addToBackStack(null);
+        _fragmentTransaction.commit();
     }
 }
 
