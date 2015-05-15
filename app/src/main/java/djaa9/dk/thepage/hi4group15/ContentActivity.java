@@ -1,4 +1,4 @@
-package djaa9.dk.thepage.hi4group15;
+/*package djaa9.dk.thepage.hi4group15;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -27,4 +27,4 @@ public class ContentActivity extends FragmentActivity implements ContentFragment
     public void onFragmentInteraction(Uri uri) {
 
     }
-}
+}*/
