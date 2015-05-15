@@ -18,16 +18,31 @@ public class MainActivity extends FragmentActivity implements MenuFragment.OnFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (findViewById(R.id.fragment_container) != null){
+        _menuFragment = new MenuFragment();
+        _contentFragment = new ContentFragment();
+        _fragmentManager = getSupportFragmentManager();
 
-            if (savedInstanceState != null){
-                return;
+        if (findViewById(R.id.activity_main).getTag().equals("phone_mode")) {
+            if (findViewById(R.id.fragment_container) != null) {
+
+                if (savedInstanceState != null) {
+                    return;
+                }
+                _fragmentManager.beginTransaction().add(R.id.fragment_container, _contentFragment).commit();
+                _fragmentManager.beginTransaction().add(R.id.fragment_container, _menuFragment).commit();
             }
+        }
 
-            _menuFragment = new MenuFragment();
-            _fragmentManager = getSupportFragmentManager();
+        if (findViewById(R.id.activity_main).getTag().equals("tablet_mode")) {
+            if (findViewById(R.id.menu_fragment_container) != null
+                    && findViewById(R.id.content_fragment_container) != null ) {
 
-            _fragmentManager.beginTransaction().add(R.id.fragment_container, _menuFragment).commit();
+                if (savedInstanceState != null) {
+                    return;
+                }
+                 _fragmentManager.beginTransaction().add(R.id.menu_fragment_container, _menuFragment).commit();
+                _fragmentManager.beginTransaction().add(R.id.content_fragment_container, _contentFragment).commit();
+            }
         }
 
     }
@@ -35,16 +50,20 @@ public class MainActivity extends FragmentActivity implements MenuFragment.OnFra
     @Override
     public void onNewMenuItemSelected(String selectedMenuItem) {
 
-        _contentFragment = new ContentFragment();
-        Bundle args = new Bundle();
-        args.putString(ContentFragment.ARG_SELECTED_ITEM, selectedMenuItem);
-        _contentFragment.setArguments(args);
+        if (findViewById(R.id.activity_main).getTag().equals("phone_mode")) {
+            _contentFragment.setSelecteditem(selectedMenuItem);
 
-        _fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            _fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            _fragmentTransaction.replace(R.id.fragment_container, _contentFragment);
 
-        _fragmentTransaction.replace(R.id.fragment_container, _contentFragment);
-        _fragmentTransaction.addToBackStack(null);
-        _fragmentTransaction.commit();
+            _fragmentTransaction.addToBackStack(null);
+            _fragmentTransaction.commit();
+        }
+
+        if (findViewById(R.id.activity_main).getTag().equals("tablet_mode")) {
+            _contentFragment.setSelecteditem(selectedMenuItem);
+
+        }
     }
 }
 

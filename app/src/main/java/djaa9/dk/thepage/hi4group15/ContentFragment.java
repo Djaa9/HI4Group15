@@ -11,10 +11,14 @@ import android.widget.TextView;
 
 
 public class ContentFragment extends Fragment {
-    public static final String ARG_SELECTED_ITEM ="param1" ;
+    public static final String ARG_SELECTED_ITEM = "param1";
     private String _selectedItem;
     private MenuFragment.OnFragmentInteractionListener mListener;
     private TextView _textView;
+
+    public ContentFragment() {
+        // Required empty public constructor
+    }
 
     public static ContentFragment newInstance(String param1) {
         ContentFragment fragment = new ContentFragment();
@@ -24,15 +28,13 @@ public class ContentFragment extends Fragment {
         return fragment;
     }
 
-    public ContentFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            _selectedItem = getArguments().getString(ARG_SELECTED_ITEM);
+            //if (_selectedItem != null) {
+                //_selectedItem = getArguments().getString(ARG_SELECTED_ITEM);
+            //}
         }
     }
 
@@ -41,8 +43,10 @@ public class ContentFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_content, container, false);
         _textView = (TextView) v.findViewById(R.id.content_frag_txt);
 
+        //if (_selectedItem != null || _selectedItem != "")
+        //_textView.setText(_selectedItem);
+
         // Inflate the layout for this fragment
-        _textView.setText(_selectedItem);
         return v;
     }
 
@@ -51,4 +55,10 @@ public class ContentFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    public void setSelecteditem(String selectedItem) {
+        _textView.setText(selectedItem);
+    }
+
 }
+
